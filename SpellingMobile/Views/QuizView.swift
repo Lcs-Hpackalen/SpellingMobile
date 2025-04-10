@@ -15,6 +15,7 @@ struct QuizView: View {
     // of the game for us
     @State var viewModel = QuizViewModel()
     
+    
     // MARK: Computed properties
     
     // This presents the user interface
@@ -39,16 +40,30 @@ struct QuizView: View {
                         
                     HStack {
                     
-                        // Let the user check their guess
-                        Button {
-                            viewModel.saveResult()
-                            viewModel.newWord()
-                        } label: {
-                            Text("New Word")
+                        // Let the user pick a new word
+                        if viewModel.buttonIsEnabled == true{
+                            Button() {
+                                viewModel.saveResult()
+                                viewModel.newWord()
+                            } label: {
+                                Text("New Word")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                            .disabled(false)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.green)
-
+                        else {
+                            Button() {
+                                viewModel.saveResult()
+                                viewModel.newWord()
+                            } label: {
+                                Text("New Word")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                            .disabled(true)
+                        }
+                        
                         // Let the user check their guess
                         Button {
                             viewModel.checkGuess()
@@ -56,7 +71,6 @@ struct QuizView: View {
                             Text("Check")
                         }
                         .buttonStyle(.borderedProminent)
-                        
                     }
                     
                 }

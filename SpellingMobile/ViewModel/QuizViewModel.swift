@@ -33,6 +33,8 @@ class QuizViewModel {
     // (not yet used in the app, but will be soon)
     var selectedOutcomeFilter: Outcome = .undetermined
     
+    var buttonIsEnabled: Bool = false
+    
     // MARK: Initializer(s)
     init() {
         // Initializer is included but doesn't need
@@ -46,6 +48,9 @@ class QuizViewModel {
     // Check the user's guess
     func checkGuess() {
         
+        
+        buttonIsEnabled = true
+        
         // Change capitals to lowercase before comparing
         // Then see if what the user typed is accurate
         if userGuess.lowercased() == currentItem.word {
@@ -53,7 +58,7 @@ class QuizViewModel {
         } else {
             currentOutcome = .incorrect
         }
-        
+        buttonIsEnabled = true
     }
     
     // Save the prior result
@@ -69,6 +74,7 @@ class QuizViewModel {
             at: 0
         )
         
+
     }
     
     // Set up a new round of this quiz game
@@ -82,6 +88,8 @@ class QuizViewModel {
         
         // We don't yet know what the outcome of the user's guess is
         currentOutcome = .undetermined
+        
+        buttonIsEnabled = false
     }
         
 }
